@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMAGES - 2020</title>
+    <style>
+        img{
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Kongu Engineering College</h3>
+    <div>
+        <button type="button" onclick="onsbr();">Search By Roll</button>        <button type="button" onclick="onsbdept();">Search By Department</button>
+    </div>
+    <div id="for">
+
+    </div>
+    </form>
+    <div id="IMG">
+    </div>
+</body>
+<script>
+    function print_img()
+    {
+        event.preventDefault();
+        var r = document.getElementById('roll').value;
+        r = r.toUpperCase();
+        var n = document.getElementById('nos').value;
+        var IMG_CON = '<img src="https://results.kongu.edu/Photos/'+r+'001.jpg" title="'+r+'001">';
+        for(var k=2;k<=n;k++)
+        {
+            var kk;
+            if(k<10)
+                kk = '00'+k;
+            else if(k<100)
+                kk = '0'+k;
+            else    
+                kk = k;
+            let samp = '<img src="https://results.kongu.edu/Photos/'+r+kk+'.jpg" title='+r+kk+'>';
+            IMG_CON = IMG_CON + samp;
+        }
+        document.getElementById('IMG').innerHTML = IMG_CON;
+    }
+    function onsbdept()
+    {
+        document.getElementById('for').innerHTML = '<form action="#" method="post" onsubmit="print_img();">\
+    Enter Department Roll :\
+    <input type="text" id="roll" required>\
+    Enter Number of Students : \
+    <input type="number" id="nos" required>\
+    <button type="submit">Print</button>'
+    }
+    function onsbr()
+    {
+        document.getElementById('for').innerHTML = '<form action="#" method="post" onsubmit="print_img_br();">\
+    Enter Roll :\
+    <input type="text" id="roll1" required>\
+    <button type="submit">Print</button>';
+    }
+    function print_img_br()
+    {
+        event.preventDefault();
+        var r = document.getElementById('roll1').value;
+        kk = r.toUpperCase();
+        document.getElementById('IMG').innerHTML = '<img src="https://results.kongu.edu/Photos/'+kk+'.jpg" title='+kk+'>';
+    }
+</script>
+</html>
