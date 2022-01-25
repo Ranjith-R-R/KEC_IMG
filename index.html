@@ -4,32 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMAGES - 2020</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>KEC - Root Details</title>
     <style>
+        body{
+            font-family: 'Book Antiqua';
+            font-size: 20px;
+        }
         img{
             width: 200px;
             height: 200px;
+            border:1px solid black;
         }
     </style>
 </head>
 <body>
-    <h3>Kongu Engineering College</h3>
-    <div>
-        <button type="button" onclick="onsbr();">Search By Roll</button>        <button type="button" onclick="onsbdept();">Search By Department</button>
+    <div class="container">
+    <h3 class="text-center">Kongu Engineering College</h3>
+    <div class="mt-5">
+        <div class="row text-center">
+        <div class="col-md-4 mb-1"> <button type="button" class="btn btn-success" onclick="onsbr();">Search By Roll</button>    </div>    
+        <div class="col-md-4 mb-1"><button type="button" class="btn btn-success" onclick="onsbdept();">Search By Department</button></div> 
+        <div class="col-md-4 mb-1"><button type="button" class="btn btn-success" onclick="listdept();">List Roll-Department</button> </div> 
     </div>
-    <div id="for">
-
+    </div>
+    <div id="for" class="container text-center mt-5">
+        
     </div>
     </form>
-    <div id="IMG">
+    <div id="listt">
+        
     </div>
+    <div id="IMG" class="container text-center mt-5">
+    </div>
+</div>
 </body>
 <script>
+    let depts_roll = ['isr','bsr','bcr','isr','mcr','mbr','ifr','mfr','mhr','itr','ftr','chr','mtr','mer','eir','eer','ecr','csr','cer','aur','aer','cor','msr','cmr'];
+    let depts_name = ['m.sc-ss(5Y)','b.sc-ss','b.sc-csd','b.sc-is','mca','mba','m.tech-it','m.tech-food','m.tech-chemical','b.tech-it','b.tech-food','b.tech-chemical','be-mechatronics','be-mechanical','be-eie','be-eee','be-ece','be-cse','be-civil','be-automobile','me-ae','me-cs','me-cse','me-ce'];
+    function listdept(){
+        let r = "<table class='table table-bordered mt-5 text-center'><tr><th>Roll</th><th>Department</th></tr>";
+        for(let i=0;i<depts_roll.length;i++)
+        {
+           r+='<tr><td>'+depts_roll[i].toUpperCase()+'</td><td>'+depts_name[i].toUpperCase();+'</td></tr>';
+        }
+        document.getElementById('listt').innerHTML = r + "</table>";
+    }
     function print_img()
     {
+        document.getElementById('listt').innerHTML = "";
         event.preventDefault();
+        var k = document.getElementById('year').value;
         var r = document.getElementById('roll').value;
-        r = r.toUpperCase();
+        r = k+r.toUpperCase();
         var n = document.getElementById('nos').value;
         var IMG_CON = '<img src="https://results.kongu.edu/Photos/'+r+'001.jpg" title="'+r+'001">';
         for(var k=2;k<=n;k++)
@@ -48,19 +77,34 @@
     }
     function onsbdept()
     {
-        document.getElementById('for').innerHTML = '<form action="#" method="post" onsubmit="print_img();">\
-    Enter Department Roll :\
-    <input type="text" id="roll" required>\
+        let kkk = '<form action="#" method="post" onsubmit="print_img();">\
+    Enter Year :\
+    <select class="form-control" name="year" id="year" required>\
+            <option value="16">2016</option>\
+            <option value="17">2017</option>\
+            <option value="18">2018</option>\
+            <option value="19">2019</option>\
+            <option value="20">2020</option>\
+            <option value="21">2021</option>\
+        </select>\
+    Enter Department :\
+    <select class="form-control" name="roll" id="roll">';
+            for(let i=0;i<depts_roll.length;i++)
+            {
+                kkk+='<option value="'+depts_roll[i]+'"">'+depts_name[i].toUpperCase()+'</option>';
+            }
+       kkk+=' </select>\
     Enter Number of Students : \
-    <input type="number" id="nos" required>\
-    <button type="submit">Print</button>'
+    <input class="form-control mb-2 " type="number" id="nos" required>\
+    <button type="submit" class="btn btn-primary">Print</button>'
+    document.getElementById('for').innerHTML = kkk;
     }
     function onsbr()
     {
         document.getElementById('for').innerHTML = '<form action="#" method="post" onsubmit="print_img_br();">\
     Enter Roll :\
-    <input type="text" id="roll1" required>\
-    <button type="submit">Print</button>';
+    <input class="form-control mb-2 " type="text" id="roll1" required>\
+    <button type="submit"class="btn btn-primary">Print</button>';
     }
     function print_img_br()
     {
