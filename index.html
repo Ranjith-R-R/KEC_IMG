@@ -130,7 +130,8 @@
         var r = document.getElementById('roll').value;
         r = k+r.toUpperCase();
         var n = document.getElementById('nos').value;
-        var IMG_CON = '<img src="https://results.kongu.edu/Photos/'+r+'001.jpg" title="'+r+'001">';
+        let type = (r.startsWith("22"))?"JPG":"jpg";
+        var IMG_CON = '<img src="https://results.kongu.edu/Photos/'+r+'001."'+ type +' title="'+r+'001">';
         for(var k=2;k<=n;k++)
         {
             var kk;
@@ -140,7 +141,7 @@
                 kk = '0'+k;
             else    
                 kk = k;
-            let samp = '<img src="https://results.kongu.edu/Photos/'+r+kk+'.jpg" title='+r+kk+'>';
+            let samp = '<img src="https://results.kongu.edu/Photos/'+r+kk+'."'+ type +' title='+r+kk+'>';
             IMG_CON = IMG_CON + samp;
         }
         document.getElementById('IMG').innerHTML = IMG_CON;
@@ -189,7 +190,8 @@
         event.preventDefault();
         var r = document.getElementById('roll1').value;
         kk = r.toUpperCase();
-        document.getElementById('IMG').innerHTML = '<img src="https://results.kongu.edu/Photos/'+kk+'.jpg" title='+kk+'>';
+        let type = (kk.startsWith("22"))?"JPG":"jpg";
+        document.getElementById('IMG').innerHTML = '<img src="https://results.kongu.edu/Photos/'+kk+'."'+ type +' title='+kk+'>';
         SearchStudentList(r);
     }
 
